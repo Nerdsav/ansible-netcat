@@ -1,0 +1,14 @@
+- name: "Verify if the service is already existing"
+  stat:
+    path: "/lib/systemd/system/ncat@.service"
+  register: svcfile_existing
+
+- name: "Upload the service file"
+  template:
+     src: "ncservice.file"
+     dest: "/lib/systemd/system/ncat@.service"
+     owner: "root"
+     group: "root"
+     mode: "0644"
+  when: >
+        not svcfile_existing.stat.exists

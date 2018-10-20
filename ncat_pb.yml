@@ -1,0 +1,6 @@
+
+- hosts: ncathosts
+  become: true
+  roles:
+  - ncat
+
