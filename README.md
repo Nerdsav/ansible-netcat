@@ -1,4 +1,4 @@
-# Ansible Playbook - Netcat service
+# Ansible Playbook - Netcat systemd service
 
 This is an Ansible playbook which creates a static systemd service to start and run netcat on a specified port.
 
@@ -9,14 +9,20 @@ Date - 2018-10-20
 
 
 ## Documentation
-Run the playbook:
+
+### Notes
+This playbook is designed and tested on a standard Ubuntu 16.04 installation.
+
+### Usage
+1. Run the playbook to deploy the netcat service
 > ansible-playbook ncat_pb.yml
 
-Login to the server and start the service.
+2. Login to the server and start the netcat service
 > systemctl start ncat@&lt;PORT&gt;.service 
 
-Verify connection:
+3. Verify connection:
 > telnet {server} {port}
+
 
 ## License
 
