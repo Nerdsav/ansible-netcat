@@ -23,6 +23,12 @@ This playbook is designed and tested on a standard Ubuntu 16.04 installation.
 3. Verify connection:
 > telnet {server} {port}
 
+### Assumptions
+Host inventory contains a group "netcathosts" with hosts where you want the netcat service to be deployed to. Example:
+* server1
+* server2
+* server3
+
 
 ## License
 
