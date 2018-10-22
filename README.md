@@ -24,10 +24,16 @@ This playbook is designed and tested on a standard Ubuntu 16.04 installation.
 > telnet {server} {port}
 
 ### Assumptions
-Host inventory contains a group "netcathosts" with hosts where you want the netcat service to be deployed to. Example:
+1. Host inventory contains a group "ncathosts" with hosts where you want the netcat service to be deployed to. Example:
 * server1
-* server2
 * server3
+
+2. Python (2) needs to be installed on all nodes.
+> sudo apt update && sudo apt upgrade -y
+
+> sudo reboot
+
+> sudo apt install python -y
 
 
 ## License
