@@ -4,7 +4,7 @@ This is an Ansible playbook which creates a static systemd service to start and 
 
 
 ## Version
-Uploaded to GitLab repo 2018-12-11
+Uploaded to GitHub repo 2018-12-11
 
 
 ## Documentation
