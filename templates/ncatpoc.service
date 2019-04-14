@@ -1,0 +1,10 @@
+[Unit]
+Description=netcat listener service on port {{ listenport }}
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/nc -k -l 0.0.0.0 {{ listenport }}
+Restart=on-failure
+RestartSec=1

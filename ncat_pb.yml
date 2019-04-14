@@ -1,6 +1,32 @@
 
-- hosts: ncathosts
+- hosts: all
   become: true
-  roles:
-  - ncat
+  tasks:
 
+    - name: Install netcat if not existing
+      yum:
+        name: nmap-ncat
+        state: present
+
+    - name: "Upload the service file"
+      template:
+        src: "ncatpoc.service"
+        dest: "/lib/systemd/system/ncatpoc.service"
+        owner: "root"
+        group: "root"
+        mode: "0644"
+
+    - name: "Reload systemd"
+      systemd:
+        daemon_reload: yes
+
+    - name: "Start the netcat service"
+      systemd:
+        name: "ncatpoc.service"
+        state: started
+
+    - name: Test the service from local machine
+      shell: "nc -zv 192.168.56.68 {{ listenport }}"
+      
+    - debug:
+        msg: "Dummy service using netcat has been configured and working. Congratulations!"

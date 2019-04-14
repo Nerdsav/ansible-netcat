@@ -1,50 +1,33 @@
-# Ansible POC - netcat systemd service
 
-This is an Ansible playbook which creates a static systemd service to start and run netcat on a specified port.
+# Ansible proof-of-concept - netcat systemd service
 
+This project consists of a simple Ansible playbook which creates a static systemd service to start a dummy service on a specified port using `netcat`.
 
-## Version
-Uploaded to GitHub repo 2018-12-11
+## Limitation
 
+The playbook is for Red Hat Enterprise Linux 7 targets (and derivatives).
 
-## Documentation
+## Usage
 
-### Setup
-1. Host inventory contains a group ncathosts:
-```bash
-[ncathosts]
-server1
-server3
-```
-### Limitations and to-do
-1. The playbook has been used and tested against Ubuntu 16.04 servers.
+1. Identify the IP address of the target and the desired port.
 
-2. The playbook does not work with Python3 which is the default for Ubuntu 16.04. I am still working on this. Python2 needs to be installed on all nodes for now.
-```bash
-sudo apt update
-sudo apt upgrade
-sudo reboot
-sudo apt install python
-```
+    ```bash
+    echo 192.168.56.68 > hosts
+    export port=1234
+    ```
 
-### Usage
-1. Run the playbook to deploy the netcat service
-```bash
-ansible-playbook ncat_pb.yml
-```
+2. Run the playbook to deploy and start the service.
 
-2. Login to the server and start the netcat service
-```bash
-systemctl start ncat@$PORT;.service 
-```
+    ```bash
+    ansible-playbook -i hosts -e "listenport=$port" ncat_pb.yml
+    ```
 
-3. Verify connection:
-```bash
-telnet localhost $PORT
-```
+3. The playbook performs the test, but you can also verify using the following command:
+
+    ```bash
+    nc -zv 192.168.56.68 $port
+    ```
 
 ## License
 
-Copyright (c) 2018 Lester Guerzon &lt;lesterguerzon@pm.me&gt;
-
-Licensed under the GNU GENERAL PUBLIC LICENSE Version 3. See LICENSE in the project root for license information.
+Copyright (c) [Lester Guerzon](mailto:lester@ilesterg.net); See [LICENSE](./LICENSE) for more information.
